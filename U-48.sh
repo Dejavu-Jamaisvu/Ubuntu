@@ -4,13 +4,13 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-48] 패스워드 최소 사용기간 설정
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: 패스워드 최소 사용기간이 1일 이상 설정되어 있는 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: 패스워드 최소 사용기간이 설정되어 있지 않는 경우
 
 EOF
 
@@ -18,22 +18,19 @@ BAR
 
 
 
-# Define the Apache config file
-file="/[Apache_home]/conf/httpd.conf"
 
-# Check if the file exists
-if [ -f "$file" ]; then
-    # Open the file in vi editor and search for "Options"
-    vi +/Options "$file"
-    # Replace "Options Indexes" with "Options"
-    :%s/Options Indexes/Options/g
-    # Save and quit the file
-    :wq
-else
-    echo "httpd.conf file not found in /[Apache_home]/conf/"
-fi
+# Open the file in nano
+sudo nano /etc/login.defs
 
+# Prompt the user to enter the minimum age (in days)
+echo "Enter the minimum age (in days) for user's password:"
+read -r min_days
 
+# Search for the line containing "PASS_MIN_DAYS" and set its value to the entered minimum days
+sed -i "s/^PASS_MIN_DAYS.*/PASS_MIN_DAYS $min_days/" /etc/login.defs
+
+# Save and exit the file
+:wq
 
 
 cat $result
