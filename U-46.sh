@@ -18,22 +18,18 @@ BAR
 
 
 
-# Define the Apache config file
-file="/[Apache_home]/conf/httpd.conf"
+# Open the file in nano
+sudo nano /etc/login.defs
 
-# Check if the file exists
-if [ -f "$file" ]; then
-    # Open the file in vi editor and search for "Options"
-    vi +/Options "$file"
-    # Replace "Options Indexes" with "Options"
-    :%s/Options Indexes/Options/g
-    # Save and quit the file
-    :wq
-else
-    echo "httpd.conf file not found in /[Apache_home]/conf/"
-fi
+# Prompt the user to enter their minimum password length
+echo "Enter the minimum password length:"
+read -r min_len
 
+# Search for the line containing "PASS_MIN_LEN" and set its value to the entered minimum length
+sed -i "s/^PASS_MIN_LEN.*/PASS_MIN_LEN $min_len/" /etc/login.defs
 
+# Save and exit the file
+:wq
 
 
 cat $result
