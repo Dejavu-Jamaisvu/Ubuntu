@@ -18,17 +18,17 @@ BAR
 
 
 
-# Open the file in nano
+# 파일Open
 sudo nano /etc/login.defs
 
-# Prompt the user to enter the maximum age (in days)
+# 사용자에게 최대 사용 기간(일)을 입력하라는 메시지 표시
 echo "Enter the maximum age (in days) for user's password:"
 read -r max_days
 
-# Search for the line containing "PASS_MAX_DAYS" and set its value to the entered maximum days
+# "PASS_MAX_DAYS"가 포함된 줄을 검색하고 입력된 최대 일 수로 값을 설정
 sed -i "s/^PASS_MAX_DAYS.*/PASS_MAX_DAYS $max_days/" /etc/login.defs
 
-# Save and exit the file
+# 파일 저장 후 종료
 :wq
 
 

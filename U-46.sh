@@ -16,21 +16,18 @@ EOF
 
 BAR
 
-
-
-# Open the file in nano
+# 파일 Open 
 sudo nano /etc/login.defs
 
-# Prompt the user to enter their minimum password length
+# 사용자에게 최소 암호 길이를 입력하라는 메시지 표시
 echo "Enter the minimum password length:"
 read -r min_len
 
-# Search for the line containing "PASS_MIN_LEN" and set its value to the entered minimum length
+# "PASS_MIN_LEN"이 포함된 라인을 검색하고 입력된 최소 길이로 값을 설정
 sed -i "s/^PASS_MIN_LEN.*/PASS_MIN_LEN $min_len/" /etc/login.defs
 
-# Save and exit the file
+# 파일 저장 후 종료
 :wq
-
 
 cat $result
 
