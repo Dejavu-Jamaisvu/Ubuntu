@@ -4,35 +4,33 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-01] 웹서비스 링크 사용금지
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: 심볼릭 링크, aliases 사용을 제한한 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: 심볼릭 링크, aliases 사용을 제한하지 않은 경우 
 
 EOF
 
 BAR
 
 
-
-# Define the Apache config file
+# Apache 구성 파일 정의
 file="/[Apache_home]/conf/httpd.conf"
 
-# Check if the file exists
+# 파일이 있는지 확인
 if [ -f "$file" ]; then
-    # Open the file in vi editor and search for "Options"
+    # vi 편집기에서 파일을 열고 "Options"을 검색
     vi +/Options "$file"
-    # Replace "Options Indexes" with "Options"
-    :%s/Options Indexes/Options/g
-    # Save and quit the file
+    # "Options FollowSymLinks"를 "Options"으로 바꿈
+    :%s/Options FollowSymLinks/Options/g
+    # 파일 저장 후 종료
     :wq
 else
     echo "httpd.conf file not found in /[Apache_home]/conf/"
 fi
-
 
 
 

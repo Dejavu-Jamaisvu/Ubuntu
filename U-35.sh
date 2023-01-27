@@ -18,16 +18,16 @@ BAR
 
 
 
-# Define the Apache config file
+# Apache 구성 파일 정의
 file="/[Apache_home]/conf/httpd.conf"
 
-# Check if the file exists
+# 파일이 있는지 확인
 if [ -f "$file" ]; then
-    # Open the file in vi editor and search for "Options"
+    #  vi 편집기에서 파일을 열고 "Options"을 검색
     vi +/Options "$file"
-    # Replace "Options Indexes" with "Options"
+    # "Options Indexes"을 "Options"으로 바꾸기
     :%s/Options Indexes/Options/g
-    # Save and quit the file
+    # 파일 저장 후 종료
     :wq
 else
     echo "httpd.conf file not found in /[Apache_home]/conf/"
