@@ -4,50 +4,31 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-19] 접속 IP 및 포트 제한
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: 접속을 허용할 특정 호스트에 대한 IP 주소 및 포트 제한을 설정한 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: 접속을 허용할 특정 호스트에 대한 IP 주소 및 포트 제한을 설정하지 않은 경우
 
 EOF
 
 BAR
 
 
-# Change ownership of /etc/hosts.equiv to root
-sudo chown root /etc/hosts.equiv
-
-# Change ownership of $HOME/.rhosts to <user_name>
-sudo chown <user_name> $HOME/.rhosts
 
 
+# IP 범위 192.168.1.0/24에서 포트 22로 들어오는 TCP 연결 허용192.168.1.0/24
+sudo iptables -A INPUT -p tcp -s 192.168.1.0/24 --dport 22 -j ACCEPT
+
+# 포트 22에서 다른 모든 수신 TCP 연결 삭제
+sudo iptables -A INPUT -p tcp --dport 22 -j DROP
 
 
-# Change permissions of /etc/hosts.equiv to 600 or less
-sudo chmod 600 /etc/hosts.equiv
+# 설정저장@확인필요
+sudo /sbin/iptables-save > /etc/iptables/rules.v4
 
-# Change permissions of $HOME/.rhosts to 600 or less
-sudo chmod 600 $HOME/.rhosts
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@이스크립트 맞는지 확인필요@@@@@@@@@@@@@@@@@@@@@@
-# remove "+" from /etc/hosts.equiv
-sed -i '/^+/d' /etc/hosts.equiv
-
-# remove "+" from $HOME/.rhosts
-sed -i '/^+/d' $HOME/.rhosts
-
-# add allowed host to /etc/hosts.equiv
-echo "host1" >> /etc/hosts.equiv
-echo "host2" >> /etc/hosts.equiv
-
-# add allowed account to $HOME/.rhosts
-echo "account1" >> $HOME/.rhosts
-echo "account2" >> $HOME/.rhosts
 
 
 cat $result
