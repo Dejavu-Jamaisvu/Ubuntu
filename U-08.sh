@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-08] 파일 및 디렉토리 관리
+CODE [U-08] /etc/shadow 파일 소유자 및 권한 설정
 
 cat << EOF >> $result
 

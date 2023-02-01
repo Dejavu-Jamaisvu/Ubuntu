@@ -4,13 +4,13 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-13] SUID, SGID, 설정 파일점검
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: 주요 실행파일의 권한에 SUID와 SGID에 대한 설정이 부여되어 있지 않은 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: 주요 실행파일의 권한에 SUID와 SGID에 대한 설정이 부여되어 있는 경우
 
 EOF
 
@@ -22,7 +22,7 @@ TMP1=`SCRIPTNAME`.log
 
 #@@@@@@@@@@@@@@@@@@@@@@@조치를 어떻게 하는 지 확인필요@@@@@@@@@@@@@@@@
 # (불필요한 파일네임을 확인해야함)
-# Remove SUID and SGID permissions from main executable
+# 기본 실행 파일에서 SUID 및 SGID 사용 권한 제거
 file_name="/usr/bin/main"
 chmod -s $file_name
 
@@ -30,10 +30,10 @@ chmod -s $file_name
 # 주기적인 감사방법 (굳이 와일문, sleep 써야하는지 확인 한번더)
 while true
 do
-    # Find all files owned by root with SUID or SGID bit set
+    # SUID 또는 SGID 비트가 설정된 루트가 소유한 모든 파일 찾기
     find / -xdev -user root \( -perm -04000 -o -perm -02000 \) -type f -exec ls -al {} \;
 
-    # Sleep for a day
+    # 하루동안 Sleep 
     sleep 86400
 done
 
@@ -43,10 +43,10 @@ done
 setuid_file_name="/usr/bin/setuid_file"
 allowed_group="sudo"
 
-# Change the group of the setuid file to the allowed group
+# setuid 파일의 그룹을 허용된 그룹으로 변경
 /usr/bin/chgrp $allowed_group $setuid_file_name
 
-# Change the permissions of the setuid file to allow execution by owner and the allowed group, and disallow others
+# setuid 파일의 사용 권한을 변경하여 소유자 및 허용된 그룹이 실행할 수 있도록 하고 다른 사용자는 허용하지 않도록 함
 /usr/bin/chmod 4750 $setuid_file_name
 
 

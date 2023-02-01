@@ -4,13 +4,13 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-14] 사용자, 시스템 시작파일 및 환경파일 소유자 및 권한 설정
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈 디렉터리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여된 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈 디렉터리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 부여된 경우
 
 EOF
 
@@ -21,22 +21,21 @@ TMP1=`SCRIPTNAME`.log
 >$TMP1  
 
 #@@@@@@@@@@@@@@@@@@@@@@@조치해야하는 파일을 받아오는 방법 확인 필요@@@@@@@@@@@@@@@@
-#!/bin/bash
 
-# File to check
+# 확인할 파일
 file_name="/path/to/file"
 
-# Home directory environment variable file
+# 홈 디렉토리 환경 변수 파일
 home_dir_file="/etc/environment"
 
-# New owner
+# 새 소유자
 new_owner="username"
 
-# Check if the home directory file is owned by root
+# 홈 디렉토리 파일이 루트에 의해 소유되는지 확인
 if [ "$(stat -c %U $home_dir_file)" == "root" ]; then
-  # Check if a non-owner has write permission
+  # 소유자가 아닌 사용자에게 쓰기 권한이 있는지 확인
   if [ -w $file_name ] && [ "$(stat -c %U $file_name)" != "root" ]; then
-    # Change the owner of the file
+    # 파일 소유자 변경
     chown $new_owner $file_name
     echo "Owner of $file_name changed to $new_owner"
   else

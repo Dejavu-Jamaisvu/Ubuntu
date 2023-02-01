@@ -4,13 +4,13 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-12] /etc/services 파일 소유자 및 권한 설정
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: etc/services 파일의 소유자가 root(또는 bin, sys)이고, 권한이 644 이하인 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: etc/services 파일의 소유자가 root(또는 bin, sys)가 아니거나, 권한이 644 이하가 아닌 경우
 
 EOF
 
@@ -22,11 +22,11 @@ TMP1=`SCRIPTNAME`.log
 
 file="/etc/services"
 
-# Check if file exists
+# 파일이 있는지 확인
 if [ -e $file ]; then
-  # Change ownership to root
+  # 소유권을 루트로 변경
   sudo chown root:root $file
-  # Change permissions to 644
+  # 권한을 644로 변경
   sudo chmod 644 $file
   echo "File ownership and permissions set to root:root and 644"
 else

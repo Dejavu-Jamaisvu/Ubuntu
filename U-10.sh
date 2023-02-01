@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-10] /etc/(x)inetd.conf 파일 소유자 및 권한 설정
 
 cat << EOF >> $result
 
@@ -23,11 +23,11 @@ TMP1=`SCRIPTNAME`.log
 
 file="/etc/inetd.conf"
 
-# Check if file exists
+# 파일이 있는지 확인
 if [ -e $file ]; then
-  # Change ownership to root
+  # 소유권을 루트로 변경
   sudo chown root:root $file
-  # Change permissions to 600
+  # 권한을 600으로 변경
   sudo chmod 600 $file
   echo "File ownership and permissions set to root:root and 600"
 else
@@ -36,11 +36,11 @@ fi
 
 file="/etc/xinetd.conf"
 
-# Check if file exists
+# 파일이 있는지 확인
 if [ -e $file ]; then
-  # Change ownership to root
+  # 소유권을 루트로 변경
   sudo chown root:root $file
-  # Change permissions to 600
+  # 권한을 600으로 변경
   sudo chmod 600 $file
   echo "File ownership and permissions set to root:root and 600"
 else

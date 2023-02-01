@@ -4,13 +4,13 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-09] /etc/hosts 파일 소유자 및 권한 설정
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: /etc/hosts 파일의 소유자가 root이고, 권한이 600인 이하경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: /etc/hosts 파일의 소유자가 root가 아니거나, 권한이 600 이상인 경우
 
 EOF
 
@@ -20,21 +20,21 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-# Change owner and group to root
+# 소유자 및 그룹을 루트로 변경
 sudo chown root:root /etc/inetd.conf
 
-# Change permissions to 600 (read-write for owner only)
+# 권한을 600으로 변경(읽기-쓰기 소유자만 해당)
 sudo chmod 600 /etc/inetd.conf
 
 
-#LINUX - xinetd
-# Change owner and group to root
+# # LINUX - xinetd
+# 소유자 및 그룹을 루트로 변경
 sudo chown root:root /etc/xinetd.conf
 
-# Change permissions to 600 (read-write for owner only)
+#  권한을 600으로 변경(읽기-쓰기 소유자만 해당)
 sudo chmod 600 /etc/xinetd.conf
 
-# 하위파일..
+# 하위 파일...
 
 cat $result
 
