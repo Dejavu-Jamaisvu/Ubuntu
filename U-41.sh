@@ -16,6 +16,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 # @@@@@@@@@@@@@@@@@@@@@@별도의 디렉터리 경로를 아래처럼 할 것인지 확인 필요@@@@@@@@@@@@@@@@@@@@@@@@@222
 # 새 DocumentRoot 정의
 NEW_DOCUMENT_ROOT="/path/to/new/document/root"

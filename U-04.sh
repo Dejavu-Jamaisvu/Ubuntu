@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 ##고민필요
 

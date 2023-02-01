@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 
 file="/etc/syslog.conf"

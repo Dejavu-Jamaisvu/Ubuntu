@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 
 # 파일이 들어 있는 디렉터리 정의

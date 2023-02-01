@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 # 자동 마운트 스크립트의 위치를 확인
 location=$(ls -al /etc/rc.d/rc*.d/* | grep automount)

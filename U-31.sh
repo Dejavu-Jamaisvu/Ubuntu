@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # vi로 sendmail.cf 구성 파일 열기
 vi /etc/mail/sendmail.cf

@@ -17,7 +17,9 @@ EOF
 BAR
 
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # /etc/inetd.conf에서 핑거 서비스 라인을 주석 처리
 sed -i 's/^finger/#finger/' /etc/inetd.conf

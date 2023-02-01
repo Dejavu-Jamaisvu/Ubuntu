@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 #
 sudo chown root:root /etc/passwd

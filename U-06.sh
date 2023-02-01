@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 root_dir="/path/to/root/directory"
 new_owner="new_user"

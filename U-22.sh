@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # crontab 명령의 사용 권한을 확인
 ls -l /usr/bin/crontab

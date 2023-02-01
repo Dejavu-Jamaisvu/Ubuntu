@@ -16,6 +16,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 # [Apache_home], [username] 및 [groupname]을(를) 적절한 값으로 바꿈
 APACHE_CONF_FILE=[Apache_home]/conf/httpd.conf
 USERNAME=[username]

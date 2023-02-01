@@ -17,6 +17,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 # 휠 그룹이 이미 존재하는지 점검하
 if grep -q '^wheel:' /etc/group; then
   echo "wheel group already exists"

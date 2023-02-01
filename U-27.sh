@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 #!/bin/bash
 sudo sed -i 's/rpc.cmsd.*/#&/g' /etc/inetd.conf

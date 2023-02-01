@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 
 # 내보내기 파일 위치

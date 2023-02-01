@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 
 # 백업 원본 파일

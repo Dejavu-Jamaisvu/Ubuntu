@@ -16,6 +16,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 root_profile="~/.profile"
 etc_profile="/etc/profile"
 

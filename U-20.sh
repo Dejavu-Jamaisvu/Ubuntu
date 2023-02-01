@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # 익명 FTP 액세스가 차단되지 않았는지 확인
 if grep -q "^#.*anonymous_enable=YES" /etc/vsftpd.conf; then

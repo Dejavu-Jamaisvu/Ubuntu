@@ -19,6 +19,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 # /etc/hosts.equiv의 소유권을 루트로 변경
 sudo chown root /etc/hosts.equiv

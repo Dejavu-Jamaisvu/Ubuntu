@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # 원본 파일을 백업
 cp /etc/pam.d/system-auth /etc/pam.d/system-auth.bak

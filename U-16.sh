@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 for file in /dev/*; do
   if [ ! -c "$file" ]; then

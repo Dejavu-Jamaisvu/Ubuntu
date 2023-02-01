@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 # 소유자 및 그룹을 루트로 변경
 sudo chown root:root /etc/shadow

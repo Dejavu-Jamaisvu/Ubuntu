@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # 불필요한 파일 및 디렉터리 확인
 echo "Checking for unnecessary files and directories in Apache home directory..."

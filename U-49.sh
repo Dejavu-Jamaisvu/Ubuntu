@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 # 90일 이상 로그인하지 않은 모든 사용자 목록 가져오기
 users=$(lastlog -b 90 -t | cut -d' ' -f1 | grep -v 'Username' | grep -v 'root' | grep -v 'Never logged in')

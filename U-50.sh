@@ -16,8 +16,12 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 # 파일 Open
-sudo nano /etc/group
+sudo vi /etc/group
 
 # 루트 그룹의 계정 목록을 가져옵니다
 root_users=$(grep '^root:' /etc/group | cut -d':' -f4)

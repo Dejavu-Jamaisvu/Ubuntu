@@ -16,6 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
 
 # Change owner and group to root
 sudo chown root:root /etc/inetd.conf

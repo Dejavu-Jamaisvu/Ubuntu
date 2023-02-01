@@ -16,6 +16,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 #@@@@@@@@@@@@@@@@@@@@@@@조치를 어떻게 하는 지 확인필요@@@@@@@@@@@@@@@@
 # (불필요한 파일네임을 확인해야함)
 # Remove SUID and SGID permissions from main executable

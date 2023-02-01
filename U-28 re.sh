@@ -16,7 +16,9 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
 
+>$TMP1  
 
 # backup original inetd.conf
 cp /etc/inetd.conf /etc/inetd.conf.bak

@@ -16,6 +16,10 @@ EOF
 
 BAR
 
+TMP1=`SCRIPTNAME`.log
+
+>$TMP1  
+
 # 마지막 로그인 시간 확인
 lastlog -u $USER
 
