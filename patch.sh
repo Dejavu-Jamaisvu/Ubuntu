@@ -12,7 +12,7 @@ TMP1=`SCRIPTNAME`.log
 
 . U-03.sh
 
-. U-04.sh
+#. U-04.sh
 
 . U-05.sh
 
@@ -64,13 +64,13 @@ TMP1=`SCRIPTNAME`.log
 
 . U-29.sh
 
-. U-30.sh
+#. U-30.sh
 
 . U-31.sh
 
 . U-32.sh
 
-. U-33.sh
+#. U-33.sh
 
 . U-34.sh
 
@@ -88,7 +88,7 @@ TMP1=`SCRIPTNAME`.log
 
 . U-41.sh
 
-. U-42.sh
+#. U-42.sh
 
 . U-43.sh
 
