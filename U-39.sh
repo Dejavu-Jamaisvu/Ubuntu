@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-01] 웹서비스 링크 사용금지
+CODE [U-39] 웹서비스 링크 사용금지
 
 cat << EOF >> $result
 

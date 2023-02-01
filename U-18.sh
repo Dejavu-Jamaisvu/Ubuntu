@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-19] 접속 IP 및 포트 제한
+CODE [U-18] 접속 IP 및 포트 제한
 
 cat << EOF >> $result
 

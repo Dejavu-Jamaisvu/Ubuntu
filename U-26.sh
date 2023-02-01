@@ -4,32 +4,31 @@
 
 BAR
 
-CODE [U-28] NIS, NIS+ 점검
+CODE [U-26] automountd 제거
 
 cat << EOF >> $result
 
-[양호]: NIS 서비스가 비활성화 되어 있거나, 필요 시 NIS+를 사용하는 경우
+[양호]: automountd 서비스가 비활성화 되어 있는 경우
 
-[취약]: NIS 서비스가 활성화 되어 있는 경우
+[취약]: automountd 서비스가 활성화 되어 있는 경우
 
 EOF
 
 BAR
 
 
+# 자동 마운트 스크립트의 위치를 확인
+location=$(ls -al /etc/rc.d/rc*.d/* | grep automount)
 
-# backup original inetd.conf
-cp /etc/inetd.conf /etc/inetd.conf.bak
-
-# add annotations for tftp, talk, and ntalk services
-sed -i 's/^tftp.*/\# tftp service\ntftp/' /etc/inetd.conf
-sed -i 's/^talk.*/\# talk service\ntalk dgram udp wait root /usr/sbin/tcpd in.talkd/' /etc/inetd.conf
-sed -i 's/^ntalk.*/\# ntalk service\nntalk dgram udp wait root /usr/sbin/tcpd in.ntalkd/' /etc/inetd.conf
-
-# restart inetd daemon
-/etc/init.d/inetd restart
-
-
+# 스크립트가 있는지 확인
+if [ -n "$location" ]
+then
+  # 대본의 이름을 바꾸기
+  mv $location /etc/rc.d/rc2.d/_S28automountd
+else
+  # 스크립트가 없다는 오류 메시지를 인쇄
+  echo "Error: Automount script not found."
+fi
 
 cat $result
 

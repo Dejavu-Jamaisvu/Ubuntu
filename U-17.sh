@@ -4,48 +4,51 @@
 
 BAR
 
-CODE [U-01] root 계정 원격 접속 제한
+CODE [U-01] $HOME/.rhosts, hosts.equiv 사용 금지
 
 cat << EOF >> $result
 
-[양호]: 원격 서비스를 사용하지 않거나 사용시 직접 접속을 차단한 경우
+[양호]: login, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우
+       1. /etc/hosts.equiv 및 $HOME/.rhosts 파일 소유자가 root 또는, 해당 계정인 경우
+       2. /etc/hosts.equiv 및 $HOME/.rhosts 파일 권한이 600 이하인 경우
+       3. /etc/hosts.equiv 및 $HOME/.rhosts 파일 설정에 ‘+’ 설정이 없는 경우
 
-[취약]: root 직접 접속을 허용하고 원격 서비스를 사용하는 경우
+[취약]: login, shell, exec 서비스를 사용하고, 위와 같은 설정이 적용되지 않은 경우
 
 EOF
 
 BAR
 
 
-# Change ownership of /etc/hosts.equiv to root
+# /etc/hosts.equiv의 소유권을 루트로 변경
 sudo chown root /etc/hosts.equiv
 
-# Change ownership of $HOME/.rhosts to <user_name>
+# $HOME/.r 호스트의 소유권을 <user_name>(으)로 변경
 sudo chown <user_name> $HOME/.rhosts
 
 
 
 
-# Change permissions of /etc/hosts.equiv to 600 or less
+# /etc/hosts.equiv의 사용 권한을 600 이하로 변경
 sudo chmod 600 /etc/hosts.equiv
 
-# Change permissions of $HOME/.rhosts to 600 or less
+# $HOME/.r 호스트의 사용 권한을 600 이하로 변경
 sudo chmod 600 $HOME/.rhosts
 
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@이스크립트 맞는지 확인필요@@@@@@@@@@@@@@@@@@@@@@
-# remove "+" from /etc/hosts.equiv
+# /etc/messages.equiv에서 "+" 제거
 sed -i '/^+/d' /etc/hosts.equiv
 
-# remove "+" from $HOME/.rhosts
+# $HOME/.r 호스트에서 "+" 제거
 sed -i '/^+/d' $HOME/.rhosts
 
-# add allowed host to /etc/hosts.equiv
+# 허용된 호스트를 /etc/vmdk.equiv에 추가
 echo "host1" >> /etc/hosts.equiv
 echo "host2" >> /etc/hosts.equiv
 
-# add allowed account to $HOME/.rhosts
+# $HOME/.rhosts에 허용된 계정 추가
 echo "account1" >> $HOME/.rhosts
 echo "account2" >> $HOME/.rhosts
 

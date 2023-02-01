@@ -18,20 +18,18 @@ BAR
 
 
 
-# 백업 원본 파일
-sudo cp /etc/security /etc/security.bak
+file="/etc/services"
 
-# pts/0 tops/x 설정 제거 또는 주석 달기
-sudo sed -i '/^pts\/[0-9]/s/^/#/' /etc/security
-
-
-# (Telnet 서비스 사용시 auth required /lib/security/pam_securetty.so 새로 삽입하는 방법으로 함)
-sudo sed -i '$ a auth required /lib/security/pam_securety.so' /etc/pam.d/login
-
-
-# (SSH 서비스 사용시 PermitRootLogin No 새로 삽입하는 방법으로 함)
-sudo sh -c "echo 'PermitRootLogin No' >> /etc/ssh/sshd_config"
-
+# Check if file exists
+if [ -e $file ]; then
+  # Change ownership to root
+  sudo chown root:root $file
+  # Change permissions to 644
+  sudo chmod 644 $file
+  echo "File ownership and permissions set to root:root and 644"
+else
+  echo "File does not exist"
+fi
 
 
 cat $result
