@@ -60,7 +60,7 @@ TMP1=`SCRIPTNAME`.log
 
 . U-27.sh
 
-#. U-28.sh
+. U-28.sh
 
 . U-29.sh
 

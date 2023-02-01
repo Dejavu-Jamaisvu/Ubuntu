@@ -20,17 +20,15 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-# backup original inetd.conf
-cp /etc/inetd.conf /etc/inetd.conf.bak
+# NFS 서비스 데몬 중지
+# [PID]를 프로세스의 실제 PID로 바꾸기
+kill -9 [PID]
 
-# add annotations for tftp, talk, and ntalk services
-sed -i 's/^tftp.*/\# tftp service\ntftp/' /etc/inetd.conf
-sed -i 's/^talk.*/\# talk service\ntalk dgram udp wait root /usr/sbin/tcpd in.talkd/' /etc/inetd.conf
-sed -i 's/^ntalk.*/\# ntalk service\nntalk dgram udp wait root /usr/sbin/tcpd in.ntalkd/' /etc/inetd.conf
+# NFS 시작 스크립트의 위치를 확인
+ls -al /etc/rc.d/rc*.d/* | egrep "ypserv|ypbind|ypxfrd|rpc.yppasswdd|rpc.ypupdated"
 
-# restart inetd daemon
-/etc/init.d/inetd restart
-
+# NFS 시작 스크립트 이름 바꾸기
+mv /etc/rc.d/rc2.d/S73ypbind /etc/rc.d/rc2.d/_S73ypbind
 
 
 cat $result
