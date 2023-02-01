@@ -18,6 +18,17 @@ BAR
 
 
 
+for file in /dev/*; do
+  if [ ! -c "$file" ]; then
+    continue
+  fi
+  major=$(stat -c '%t' "$file")
+  minor=$(stat -c '%T' "$file")
+  if [ -z "$major" ] || [ -z "$minor" ]; then
+    rm "$file"
+  fi
+done
+
 
 cat $result
 
